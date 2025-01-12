@@ -312,18 +312,95 @@ export default function Game() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          justifyContent: 'center',
           color: 'white',
           fontSize: '24px',
-          textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+          textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+          gap: '20px',
+          padding: '40px',
+          backgroundColor: 'rgba(0,0,0,0.7)',
+          borderRadius: '15px',
+          minWidth: '400px',
+          textAlign: 'center'
         }}>
           {gameState === 'menu' ? (
-            <div>Tap to Start</div>
+            <>
+              <h1 style={{ 
+                fontSize: '36px', 
+                textAlign: 'center',
+                width: '100%',
+                margin: 0
+              }}>
+                Jambo
+              </h1>
+              <h2 style={{ 
+                fontSize: '28px',
+                width: '100%',
+                margin: 0
+              }}>
+                Escape from the dungeon
+              </h2>
+              <div style={{ 
+                fontSize: '24px', 
+                textAlign: 'center',
+                width: '100%'
+              }}>
+                Reach 500 to win 10 000 Jambo coins
+              </div>
+              <div style={{ 
+                fontSize: '28px', 
+                marginBottom: '30px',
+                color: '#FFD700',
+                width: '100%'
+              }}>
+                High Score: {score.best}
+              </div>
+              <button 
+                onClick={handleInteraction}
+                style={{
+                  padding: '15px 30px',
+                  fontSize: '24px',
+                  backgroundColor: '#4CAF50',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '10px',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+                  transition: 'transform 0.1s',
+                  transform: 'scale(1.0)',
+                  width: '80%'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1.0)'}
+              >
+                Start New Game
+              </button>
+            </>
           ) : (
             <>
-              <div>Game Over</div>
-              <div>Score: {score.current}</div>
-              <div>Best: {score.best}</div>
-              <div>Tap to Restart</div>
+              <div style={{ fontSize: '36px', marginBottom: '20px', width: '100%' }}>Game Over</div>
+              <div style={{ fontSize: '28px', marginBottom: '10px', width: '100%' }}>Score: {score.current}</div>
+              <div style={{ fontSize: '28px', marginBottom: '30px', color: '#FFD700', width: '100%' }}>Best: {score.best}</div>
+              <button 
+                onClick={handleInteraction}
+                style={{
+                  padding: '15px 30px',
+                  fontSize: '24px',
+                  backgroundColor: '#4CAF50',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '10px',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+                  transition: 'transform 0.1s',
+                  transform: 'scale(1.0)',
+                  width: '80%'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+                onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1.0)'}
+              >
+                Try Again
+              </button>
             </>
           )}
         </div>
