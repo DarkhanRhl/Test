@@ -32,45 +32,22 @@ export class Pipe {
         const gapHalfSize = Pipe.GAP_SIZE / 2;
         
         // Draw top pipe (coming down from top)
-        ctx.save();
-        ctx.translate(this.x, this.gapY - gapHalfSize);  // Position at gap top
-        ctx.rotate(Math.PI);  // Rotate to point downward
         ctx.drawImage(
             this.sprite,
-            -this.width/2,  // Center horizontally
-            0,              // Start at rotation point
+            this.x - this.width/2,  // Center horizontally
+            0,                      // Start from top
             this.width,
-            Pipe.PIPE_HEIGHT  // Use full pipe height
+            this.gapY - gapHalfSize  // Extend from top to gap
         );
-        ctx.restore();
 
         // Draw bottom pipe (coming up from bottom)
+        const bottomPipeHeight = ctx.canvas.height - (this.gapY + gapHalfSize);
         ctx.drawImage(
             this.sprite,
             this.x - this.width/2,  // Center horizontally
             this.gapY + gapHalfSize,  // Position at gap bottom
             this.width,
-            Pipe.PIPE_HEIGHT  // Use full pipe height
-        );
-
-        // Draw hitboxes for debugging
-        ctx.strokeStyle = 'red';
-        ctx.lineWidth = 2;
-        
-        // Top pipe hitbox
-        ctx.strokeRect(
-            this.x - this.width/2 + 15,
-            0,
-            this.width - 30,
-            this.gapY - gapHalfSize
-        );
-        
-        // Bottom pipe hitbox
-        ctx.strokeRect(
-            this.x - this.width/2 + 15,
-            this.gapY + gapHalfSize,
-            this.width - 30,
-            ctx.canvas.height - (this.gapY + gapHalfSize)
+            bottomPipeHeight  // Extend from gap to bottom of screen
         );
     }
 

@@ -76,19 +76,6 @@ export class Bird {
             this.height
         );
 
-        // Draw hitbox for debugging (red rectangle)
-        ctx.strokeStyle = 'red';
-        ctx.lineWidth = 2;
-        // Draw smaller hitbox (1/3 of the actual size)
-        const hitboxWidth = this.width / 3;
-        const hitboxHeight = this.height / 3;
-        ctx.strokeRect(
-            -hitboxWidth / 2,
-            -hitboxHeight / 2,
-            hitboxWidth,
-            hitboxHeight
-        );
-
         ctx.restore();
     }
 } 

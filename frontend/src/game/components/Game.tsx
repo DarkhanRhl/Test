@@ -91,13 +91,14 @@ export default function Game() {
       const deltaTime = (timestamp - lastTime) / 16; // Normalize to ~60fps
       lastTime = timestamp;
 
-      // Clear canvas
-      ctx.fillStyle = '#87CEEB';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Clear canvas with a transparent background
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Update scroll positions (always scroll, even in menu)
-      backgroundScrollRef.current -= 0.5; // Slowest
-      groundScrollRef.current -= 2; // Same speed as pipes
+      // Update scroll positions (only when playing or in menu)
+      if (gameState !== 'gameOver') {
+        backgroundScrollRef.current -= 0.5; // Slowest
+        groundScrollRef.current -= 2; // Same speed as pipes
+      }
 
       // Reset scroll positions when they go off screen
       if (backgroundScrollRef.current <= -canvas.width) backgroundScrollRef.current = 0;
@@ -173,7 +174,7 @@ export default function Game() {
         birdRef.current.draw(ctx, gameState === 'gameOver');
       }
 
-      // Draw scrolling ground
+      // Draw scrolling ground (always on top)
       if (assets) {
         const groundHeight = 100;
         const groundY = canvas.height - groundHeight;
@@ -201,22 +202,6 @@ export default function Game() {
             setGameState('gameOver');
           }
         }
-      }
-
-      // Draw ground hitbox
-      if (assets) {
-        const groundHeight = 100;
-        const groundY = canvas.height - groundHeight;
-        
-        // Draw ground hitbox
-        ctx.strokeStyle = 'red';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(
-            0,
-            groundY,
-            canvas.width,
-            groundHeight
-        );
       }
 
       ctx.restore();
