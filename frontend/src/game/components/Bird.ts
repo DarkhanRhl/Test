@@ -60,14 +60,14 @@ export class Bird {
         }
     }
 
-    public draw(ctx: CanvasRenderingContext2D, isDead: boolean = false): void {
+    public draw(ctx: CanvasRenderingContext2D): void {
         // Draw the bird sprite as normal
         ctx.save();
         ctx.translate(this.x, this.y);
         ctx.rotate(this.velocity * 0.04);
 
-        // Draw the sprite
-        const sprite = isDead ? this.hitSprite : (this.isJumping ? this.jumpSprite : this.floatSprite);
+        // Draw the sprite (always use normal sprite)
+        const sprite = this.isJumping ? this.jumpSprite : this.floatSprite;
         ctx.drawImage(
             sprite,
             -this.width / 2,

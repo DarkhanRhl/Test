@@ -171,7 +171,7 @@ export default function Game() {
 
       // Draw bird
       if (birdRef.current) {
-        birdRef.current.draw(ctx, gameState === 'gameOver');
+        birdRef.current.draw(ctx);
       }
 
       // Draw scrolling ground (always on top)
@@ -197,7 +197,9 @@ export default function Game() {
 
         // Ground collision check
         if (gameState === 'playing' && birdRef.current) {
-          if (birdRef.current.y > groundY - birdRef.current.height / 2) {
+          // Use the bird's actual collision box (1/3 of height) for ground collision
+          const birdBottom = birdRef.current.y + birdRef.current.height/3;
+          if (birdBottom > groundY) {
             screenShake.trigger(15);
             setGameState('gameOver');
           }
